@@ -5,6 +5,7 @@ __pycache__/
 realkeys.py
 testkeys.py
 creds.json
+config.json
 
 # C extensions
 *.so
