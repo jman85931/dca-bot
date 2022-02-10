@@ -7,13 +7,12 @@ import questionary
 import time
 import datetime as dt
 from datetime import datetime as date
-from configparser import ConfigParser
 import json
 from inputimeout import inputimeout, TimeoutOccurred
 
 # vars
 test = True
-time_out = 1
+time_out = 20
 api_key = realkeys.apikey
 api_secret = realkeys.secretkey
 client = Client(api_key, api_secret)
@@ -308,7 +307,6 @@ def run():
         user_inputs = set_settings(enable_user_input)
     else:
         user_inputs = edit_config(time_out, config)
-
 
     if today in user_inputs['dca_days']:
         ss, dashboard = sheetsetup(user_inputs)
