@@ -21,12 +21,12 @@ custom_style = questionary.Style([
 ])
 today_int = dt.date.today().isoweekday()
 today = date.today().strftime("%A")
-user_inputs = {}
+# user_inputs = {}
 
 temp_order_resp = {'symbol': 'BTCUSDT', 'orderId': 9277616436, 'orderListId': -1, 'clientOrderId': 'lakmd0AvoIBYHnYayhv7dv', 'transactTime': 1644092319454, 'price': '0.00000000', 'origQty': '0.00024000', 'executedQty': '0.00024000', 'cummulativeQuoteQty': '9.94113600', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'fills': [{'price': '41421.40000000', 'qty': '0.00024000', 'commission': '0.00000024', 'commissionAsset': 'BTC', 'tradeId': 1247402376}]}
 
 # bot settings
-def usersettings(user_inputs, enable_user_input):
+def usersettings(enable_user_input):
 
     user_inputs = {}
     
@@ -291,8 +291,8 @@ def edit_config(time_out, config):
     return user_inputs
 
 # set settings
-def set_settings(user_inputs, enable_user_input):
-    user_inputs = usersettings(user_inputs, enable_user_input)
+def set_settings(enable_user_input):
+    user_inputs = usersettings(enable_user_input)
     confirm_settings = print_dca_settings(user_inputs, enable_user_input)
     save_config(confirm_settings, user_inputs)
     
