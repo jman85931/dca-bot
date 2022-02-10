@@ -1,1 +1,0 @@
-{"sheet_name": "DCA Dashboard v1.0", "dca_coins": ["BTC", "ETH"], "dca_days": ["Thursday", "Thursday"], "dca_details": {"BTC": {"dca_amount": 20.0, "dca_day": "thursday", "dca_day_int": 4}, "ETH": {"dca_amount": 20.0, "dca_day": "thursday", "dca_day_int": 4}}, "base_currency": "USDT", "risk_band_multiplier_step": 0.2}
