@@ -9,9 +9,10 @@ import datetime as dt
 from datetime import datetime as date
 import json
 from inputimeout import inputimeout, TimeoutOccurred
+from pathlib import Path
 
 # vars
-test = True
+test = False
 time_out = 20
 api_key = realkeys.apikey
 api_secret = realkeys.secretkey
@@ -81,14 +82,17 @@ def print_dca_settings(user_inputs, enable_user_input):
     
     
     if enable_user_input == True:   
-        confirm_settings = questionary.confirm("Save these settings?", style=custom_style).ask()
+        confirm_settings = questionary.confirm("Save these settings and exit?", style=custom_style).ask()
         return confirm_settings
 
 # setup dashboard
 def sheetsetup(user_inputs):
     
+    creds_path = Path('C:/Users/jamal/Documents/_trading/dca-bot/')
+    creds_to_open = creds_path / 'creds.json'
+    
     scope = ["https://spreadsheets.google.com/feeds",'https://www.googleapis.com/auth/spreadsheets',"https://www.googleapis.com/auth/drive.file","https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name(creds_to_open, scope)
     gclient = gspread.authorize(creds)
 
     ss = gclient.open(user_inputs['sheet_name'])
@@ -169,6 +173,7 @@ def dca_buy(api_key, api_secret, dca_order_details, client, temp_order_resp, tes
                     side=SIDE_BUY,
                     type=ORDER_TYPE_MARKET,
                     quoteOrderQty=dca_amount)
+                
                 temp_order_resp['symbol'] = symbol
                 buy_order = temp_order_resp
             
@@ -248,7 +253,9 @@ def check_for_config():
 
     # check if config exists
     try:
-        config = open('config.json')
+        config_path = Path('C:/Users/jamal/Documents/_trading/dca-bot/')
+        file_to_open = config_path / 'config.json'
+        config = open(file_to_open)
         enable_user_input = False
     except IOError:
         enable_user_input = True
@@ -282,7 +289,7 @@ def edit_config(time_out, config):
     if edit == 'Y':
         print('\nEdit settings & Exit...\n')
         enable_user_input = True
-        user_inputs = set_settings(user_inputs, enable_user_input)
+        user_inputs = set_settings(enable_user_input)
         print('\nExiting. Run the bot again to use these new settings.')
         exit()
     elif edit == 'N':
