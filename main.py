@@ -11,6 +11,8 @@ import json
 from inputimeout import inputimeout, TimeoutOccurred
 from pathlib import Path
 
+#TODO Logging & Date Check
+
 # vars
 test = False
 time_out = 20
@@ -24,7 +26,7 @@ today_int = dt.date.today().isoweekday()
 today = date.today().strftime("%A")
 # user_inputs = {}
 
-temp_order_resp = {'symbol': 'BTCUSDT', 'orderId': 9277616436, 'orderListId': -1, 'clientOrderId': 'lakmd0AvoIBYHnYayhv7dv', 'transactTime': 1644092319454, 'price': '0.00000000', 'origQty': '0.00024000', 'executedQty': '0.00024000', 'cummulativeQuoteQty': '9.94113600', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'fills': [{'price': '41421.40000000', 'qty': '0.00024000', 'commission': '0.00000024', 'commissionAsset': 'BTC', 'tradeId': 1247402376}]}
+temp_order_resp = {'symbol': 'BTCUSDT', 'orderId': 10150186811, 'orderListId': -1, 'clientOrderId': 'vGuVdosS00eMUMFYIjWTmp', 'transactTime': 1649673162383, 'price': '0.00000000', 'origQty': '0.00072000', 'executedQty': '0.00072000', 'cummulativeQuoteQty': '29.87208720', 'status': 'FILLED', 'timeInForce': 'GTC', 'type': 'MARKET', 'side': 'BUY', 'fills': [{'price': '41489.01000000', 'qty': '0.00072000', 'commission': '0.00000072', 'commissionAsset': 'BTC', 'tradeId': 1322466872}]}
 
 # bot settings
 def usersettings(enable_user_input):
@@ -222,8 +224,8 @@ def sheet_update(orders, ss, dca_order_details):
         
         # update cells
         ws.update_cell(row, cols['id_col'], orders[f'{k}']['id'])
-        ws.update_cell(row, cols['date_col'], date.utcfromtimestamp(orders[f'{k}']['time']/1000).strftime('%d/%M/%Y %H:%M:%S').split()[0])
-        ws.update_cell(row, cols['time_col'], date.utcfromtimestamp(orders[f'{k}']['time']/1000).strftime('%d/%M/%Y %H:%M:%S').split()[1])
+        ws.update_cell(row, cols['date_col'], date.utcfromtimestamp(orders[f'{k}']['time']/1000).strftime('%d/%m/%Y %H:%M:%S').split()[0])
+        ws.update_cell(row, cols['time_col'], date.utcfromtimestamp(orders[f'{k}']['time']/1000).strftime('%d/%m/%Y %H:%M:%S').split()[1])
         ws.update_cell(row, cols['price_col'], orders[f'{k}']['price'])
         ws.update_cell(row, cols['risk_col'], dca_order_details[k]['risk'])
         ws.update_cell(row, cols['cost_col'], orders[f'{k}']['cost'])
